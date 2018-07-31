@@ -1,5 +1,7 @@
 <template>
-    <header id="header" :class="{focus: focused}">header {{nom}}</header>
+    <header id="header" :class="{focus: focused}">
+        header        
+    </header>
 </template>
 
 <script>
@@ -7,7 +9,6 @@
         name: "app-header",
         data: function(){
             return {
-                nom: 'test',
                 focused: false
             }
         },
@@ -18,12 +19,6 @@
             removeFocus: function(){
                 this.focused = false;
             }
-        },
-        mounted: function () {
-            this.$nextTick(function () {
-                // Code that will run only after the
-                console.log(this)
-            })
         }
     }
 </script>

@@ -1,31 +1,32 @@
 <template>
     <main id="main"  class="flex">
         <div class="grow border">
-            <main-little ref="channels" :categorie="'channels'"></main-little>
+            <Contents ref="channels" :categorie="'channels'"/>
         </div>
         <div class="grow border">
-            <main-little ref="contents" :categorie="'contents'"></main-little>
+            <Contents ref="contents" :categorie="'contents'"/>
         </div>
         <div class="grow border">
-            <main-little ref="apps" :categorie="'apps'"></main-little>
+            <Contents ref="apps" :categorie="'apps'"/>
         </div>
         <div class="grow border">
-            <main-little ref="films" :categorie="'films'"></main-little>
+            <Contents ref="films" :categorie="'films'"/>
         </div>
         <div class="grow border">
-            <main-little ref="extras" :categorie="'extras'"></main-little>
+            <Contents ref="extras" :categorie="'extras'"/>
         </div>
 
     </main>
 </template>
 
 <script>
-    import MainLittle from './subComponents/MainLittle';
+    import Contents from './subComponents/Contents';
+    import { EventBus } from '../main';
 
     export default {
         name: "app-main",
         components: {
-            MainLittle
+            Contents
         },
         data:function(){
             return {
@@ -39,6 +40,7 @@
             isFocus: function () {
                 this.focused = true;
                 this.getFocus();
+                EventBus.$emit('parentRemoveListener');
             },
             removeFocus: function () {
                 this.focused = false;

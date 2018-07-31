@@ -1,10 +1,9 @@
 <template>
-    <footer id="footer" :class="{focus: focused}">footer</footer>
+    <div id="submenu" :class="{focus: focused}">sous menu</div>
 </template>
 
 <script>
     export default {
-        name: "app-footer",
         data: function() {
             return {
                 focused: false
@@ -22,7 +21,7 @@
 </script>
 
 <style scoped>
-#footer{
+#submenu{
     height: 250px;
 }
 </style>
