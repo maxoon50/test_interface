@@ -1,19 +1,19 @@
 <template>
     <main id="main"  class="flex">
         <div class="grow border">
-            <main-little ref="channels"></main-little>
+            <main-little ref="channels" :categorie="'channels'"></main-little>
         </div>
         <div class="grow border">
-            <main-little ref="contents"></main-little>
+            <main-little ref="contents" :categorie="'contents'"></main-little>
         </div>
         <div class="grow border">
-            <main-little ref="apps"></main-little>
+            <main-little ref="apps" :categorie="'apps'"></main-little>
         </div>
         <div class="grow border">
-            <main-little ref="films"></main-little>
+            <main-little ref="films" :categorie="'films'"></main-little>
         </div>
         <div class="grow border">
-            <main-little ref="extras"></main-little>
+            <main-little ref="extras" :categorie="'extras'"></main-little>
         </div>
 
     </main>
