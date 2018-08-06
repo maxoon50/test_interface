@@ -26,8 +26,8 @@ export const mixinEletWithChild = {
         
         setFocus: function (pos) {
             if(this.focus <= 0 && pos == -1){
-                this.focus = this.componentList.length-1;
-            }else if(this.focus == this.componentList.length-1 && pos == 1){
+                this.focus = this.componentList.contents.length-1;
+            }else if(this.focus == this.componentList.contents.length-1 && pos == 1){
                 this.focus = 0;
             }else{
                 this.focus += pos;

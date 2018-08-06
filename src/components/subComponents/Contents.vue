@@ -20,7 +20,6 @@
             return {
                 focused: false,
                 channels: [1,2,3,4,5],
-             
             }
         },
         methods: {
