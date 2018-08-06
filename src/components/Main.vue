@@ -1,6 +1,6 @@
 <template>
     <main id="main"  class="flex">
-        <div class="grow border">
+        <!-- <div class="grow border">
             <Contents ref="channels" :categorie="'channels'"/>
         </div>
         <div class="grow border">
@@ -14,8 +14,10 @@
         </div>
         <div class="grow border">
             <Contents ref="extras" :categorie="'extras'"/>
-        </div>
-
+        </div> -->
+      <template v-for="child in componentList">
+            <component :is="'contents'" :key="child" :categorie="'contents'" ref="contents"></component>
+        </template>
     </main>
 </template>
 
@@ -67,7 +69,7 @@
                 if(this.lastFocused != null){
                     this.lastFocused.removeFocus();
                 }
-                let eltToFocus = this.$refs[this.componentList[this.focus]];
+                let eltToFocus = this.$refs.contents[this.focus];
                 eltToFocus.isFocus();
                 this.lastFocused = eltToFocus;
             },

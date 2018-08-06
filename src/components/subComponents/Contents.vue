@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="grow border">
         <Channels v-for="(channel,i) in channels" :nom="channel.nom" ref="channels" />
     </div>
 </template>

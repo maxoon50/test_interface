@@ -1,8 +1,11 @@
 <template>
     <div id="app">
-        <app-header ref="appHeader"></app-header>
+        <template v-for="child in componentList">
+                <component :is="child" :key="child"  ref="contents"></component>
+</template>
+        <!-- <app-header ref="appHeader"></app-header>
         <SubMenu ref="SubMenu"/>
-        <app-main ref="appMain"></app-main>
+        <app-main ref="appMain"></app-main> -->
     
     </div>
 </template>
@@ -32,7 +35,7 @@
         mounted: function() {
             this.$nextTick(function() {
                 this.initListener();
-                this.lastFocused = this.$refs.SubMenu;
+                this.lastFocused = this.$refs.contents[1];
                 this.lastFocused.isFocus();
                 EventBus.$on('parentRemoveListener', () => this.removeListener());
                 EventBus.$on('parentAddListener', () => {
@@ -55,7 +58,7 @@
             },
             giveFocus: function() {
                 this.lastFocused.removeFocus();
-                let eltToFocus = this.$refs[this.componentList[this.focus]];
+                let eltToFocus = this.$refs.contents[this.focus];
                 eltToFocus.isFocus();
                 this.lastFocused = eltToFocus;
             },
