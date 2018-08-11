@@ -1,40 +1,30 @@
 <template>
-    <div class="channel" :class="{focus: focused}">
-        {{ nom }}
-    </div>
+    <div :class="{focus: focused}">{{title}}</div>
 </template>
 
 <script>
     export default {
-        components: {
-    
-        },
-        props: ['nom'],
+        name: "ItemMenu",
+        props:['title'],
         data: function() {
             return {
-                componentList: [],
                 focused: false,
                 focus: 0,
                 lastFocused: null
             }
         },
         methods: {
-    
-            isFocus: function() {
+
+            isFocus: function () {
                 this.focused = true;
             },
-            removeFocus: function() {
+            removeFocus: function () {
                 this.focused = false;
             },
-    
         }
-    }
+        }
 </script>
 
 <style scoped>
-    .channel {
-        border: 1px solid grey;
-        height: 100px;
-        width: 100%;
-    }
+
 </style>

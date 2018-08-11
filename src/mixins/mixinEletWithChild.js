@@ -43,6 +43,7 @@ export const mixinEletWithChild = {
             }
             // ici on set le focus sur le nouvel élément (selon le this.focus))
             let eltToFocus = this.$refs.contents[this.focus];
+            console.log(eltToFocus)
             eltToFocus.isFocus();
             this.lastFocused = eltToFocus;
 
