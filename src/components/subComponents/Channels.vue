@@ -22,9 +22,10 @@
     
             isFocus: function() {
                 this.focused = true;
-    
+        console.log('is focus bb')
             },
             removeFocus: function() {
+                console.log('reove focus bb')
                 this.focused = false;
                 // this.removeListeners();
                 // this.lastFocused.removeFocus();

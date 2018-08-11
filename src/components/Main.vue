@@ -47,11 +47,14 @@
             //     this.lastFocused.removeFocus();
             //     //remove tous les focus des enfants
             // },
-            // getFocus: function () {
-            //     this.focus = 0;
-            //     this.initListeners();
-            //     this.giveFocus();
-            // },
+             getFocus: function () {
+                this.focus = 0;
+                 this.initListeners();
+                 this.giveFocus();
+                 console.log(this.$parent)
+                 this.$parent.removeListeners();
+/*                 EventBus.$emit('parentRemoveListener', this.lastFocused);*/
+             },
             // setFocus: function (pos) {
                
             //     if(this.focus <= 0 && pos == -1){

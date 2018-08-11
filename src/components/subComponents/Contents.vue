@@ -35,18 +35,20 @@
             //     this.initListeners();
             //     this.giveFocus();
             // },
-            // setFocus: function(pos) {
-            //     if (this.focus <= 0 && pos == -1) {
-            //         EventBus.$emit('parentAddListener');   
-            //         this.removeListeners();                 
-            //         return;//this.focus = this.$refs.channels.length - 1;
-            //     } else if (this.focus == this.componentList.length - 1 && pos == 1) {
-            //         this.focus = 0;
-            //     } else {
-            //         this.focus += pos;
-            //     }
-            //     this.giveFocus();
-            // },
+             setFocus: function(pos) {
+                /* si on arrive en haut /*/
+                 if (this.focus <= 0 && pos == -1) {
+                     this.removeFocus();
+                     this.$parent.removeFocus();
+                     this.$parent.$parent.isFocus();
+                     return;
+                 } else if (this.focus == this.componentList.length - 1 && pos == 1) {
+                     this.focus = 0;
+                 } else {
+                     this.focus += pos;
+                 }
+                 this.giveFocus();
+             },
             // giveFocus: function() {
             //     if (this.lastFocused != null) {
             //         this.lastFocused.removeFocus();

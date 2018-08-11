@@ -16,7 +16,8 @@
     import AppMain from "./components/Main";
     import { mixinEletWithChild } from './mixins/mixinEletWithChild';
     import { EventBus } from './main';
-    
+    import { globalSource } from "./source/globalSource";
+
     export default {
         name: 'app',
         components: {
@@ -29,12 +30,15 @@
             return {
                 componentList: ['appHeader', 'SubMenu', 'appMain'],
                 focus: 1,
-                lastFocused: this,
+                lastFocused: null,
+                globalSource
             }
         },
         mounted: function() {
             this.$nextTick(function() {
                 this.initListeners();
+                //ici on set le premier focus
+
                 this.lastFocused = this.$refs.contents[1];
                 this.lastFocused.isFocus();
 /*                EventBus.$on('parentRemoveListener', () => this.removeListener());
@@ -46,6 +50,12 @@
             })
         },
         methods: {
+            isFocus: function () {
+                this.focused = true;
+                this.focus = 1;
+                this.getFocus(1);
+                // EventBus.$emit('parentRemoveListener');
+            },
             setFocus: function(pos) {
                 if (this.focus <= 0 && pos == -1) {
                     return;

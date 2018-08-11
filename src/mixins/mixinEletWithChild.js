@@ -20,8 +20,8 @@ export const mixinEletWithChild = {
             this.lastFocused.removeFocus();
             //remove tous les focus des enfants
         },
-        getFocus: function () {
-            this.focus = 0;
+        getFocus: function (index) {
+            this.focus =  index || 0;
             this.initListeners();
             this.giveFocus();
         },
@@ -45,6 +45,7 @@ export const mixinEletWithChild = {
             let eltToFocus = this.$refs.contents[this.focus];
             eltToFocus.isFocus();
             this.lastFocused = eltToFocus;
+
         },
 
         initListeners: function () {

@@ -1,9 +1,7 @@
 import Vue from 'vue'
-export const globalSource = new Vue({
-    data: function(){
-        return {
+export const globalSource = {
+
             lastEltFocused : null,
             eltFocused : null,
-        }
-    }
-});
+
+}
