@@ -1,9 +1,11 @@
 import { EventBus } from '../main';
+import { globalSource } from '../source/globalSource';
 export const mixinEletWithChild = {
     data: function() {
         return {
             focused: false,
-            componentList : this.$refs
+            componentList : this.$refs,
+            globalSource
         }
     },
     methods:{
@@ -35,13 +37,16 @@ export const mixinEletWithChild = {
             this.giveFocus();
         },
         giveFocus: function () {
+            // ici on vérifie s'il y a un last focused et on le remove au besoin
             if(this.lastFocused != null){
                 this.lastFocused.removeFocus();
             }
+            // ici on set le focus sur le nouvel élément (selon le this.focus))
             let eltToFocus = this.$refs.contents[this.focus];
             eltToFocus.isFocus();
             this.lastFocused = eltToFocus;
         },
+
         initListeners: function () {
             window.addEventListener('keydown', this.listener );
         },

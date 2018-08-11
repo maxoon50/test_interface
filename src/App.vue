@@ -14,9 +14,8 @@
     import AppHeader from "./components/Header";
     import SubMenu from "./components/SubMenu";
     import AppMain from "./components/Main";
-    import { 
-        EventBus
-    } from './main';
+    import { mixinEletWithChild } from './mixins/mixinEletWithChild';
+    import { EventBus } from './main';
     
     export default {
         name: 'app',
@@ -25,24 +24,25 @@
             SubMenu,
             AppMain
         },
+        mixins : [mixinEletWithChild],
         data: function() {
             return {
                 componentList: ['appHeader', 'SubMenu', 'appMain'],
                 focus: 1,
-                lastFocused: null,
+                lastFocused: this,
             }
         },
         mounted: function() {
             this.$nextTick(function() {
-                this.initListener();
+                this.initListeners();
                 this.lastFocused = this.$refs.contents[1];
                 this.lastFocused.isFocus();
-                EventBus.$on('parentRemoveListener', () => this.removeListener());
+/*                EventBus.$on('parentRemoveListener', () => this.removeListener());
                 EventBus.$on('parentAddListener', () => {
                     // ici le dernier focus était l'élément ciblé, on veut donc retourner sur l'elt d'avant
                     this.setFocus(-1);
-                    this.initListener();
-                })
+                    this.initListeners();
+                })*/
             })
         },
         methods: {
@@ -56,30 +56,31 @@
                 }
                 this.giveFocus();
             },
-            giveFocus: function() {
+/*            giveFocus: function() {
                 this.lastFocused.removeFocus();
                 let eltToFocus = this.$refs.contents[this.focus];
                 eltToFocus.isFocus();
                 this.lastFocused = eltToFocus;
-            },
+            },*/
             listener({
                 code
             }) {
                 switch (code) {
                     case 'ArrowDown':
-                        this.setFocus(1);
+                        this.setFocus(1); console.log('down app');
                         break;
                     case 'ArrowUp':
-                        this.setFocus(-1);
+                        this.setFocus(-1);console.log('top app');
                         break;
                 }
             },
-            initListener() {
+/*            initListener() {
                 window.addEventListener('keydown', this.listener);
             },
             removeListener() {
+                console.log('app remove listner')
                 window.removeEventListener('keydown', this.listener);
-            }
+            }*/
     
         }
     }

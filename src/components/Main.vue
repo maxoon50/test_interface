@@ -40,7 +40,7 @@
             }
         },
         methods: {
-       
+
             // removeFocus: function () {
             //     this.focused = false;
             //     this.removeListeners();
@@ -80,7 +80,7 @@
             listener: function ({code}) {
              {
                     switch(code){
-                        case 'ArrowRight' : this.setFocus(1);
+                        case 'ArrowRight' : this.setFocus(1); console.log('right');
                             break;
                         case 'ArrowLeft' : this.setFocus(-1);
                     }
