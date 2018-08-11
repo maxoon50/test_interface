@@ -1,53 +1,76 @@
 <template>
     <div id="cont">
-        <ItemMenu id="submenu" v-for="item in  subMenuElements"  class="inside" :title="item" ref="contents"/>
+        <ItemMenu id="submenu"
+                  class="inside"
+                  v-for="(item, index) in  subMenuElements"
+                  :title="item"
+                  :index="index"
+                  ref="contents"/>
     </div>
 </template>
 
 <script>
     import ItemMenu from './subComponents/ItemMenu';
-    import { mixinEletWithChild } from '../mixins/mixinEletWithChild';
+    import {mixinEletWithChild} from '../mixins/mixinEletWithChild';
+    import {EventBus} from "../main";
+
     export default {
-        components:{
-          ItemMenu
+        components: {
+            ItemMenu
         },
-        mixins : [mixinEletWithChild],
-        data: function() {
+        mixins: [mixinEletWithChild],
+        data: function () {
             return {
                 focused: false,
-                subMenuElements : ['menu1','menu2', 'menu3','menu4', 'menu5'],
+                subMenuElements: ['menu1', 'menu2', 'menu3', 'menu4', 'menu5'],
                 focus: 0,
                 lastFocused: null
             }
         },
-        methods:{
-  /*          isFocus: function(){
+        methods: {
+
+            isFocus: function () {
                 this.focused = true;
+                // on doit setter le focus sur le content qui était focus en dernier
+                this.getFocus(this.focus);
             },
-            removeFocus: function(){
-                this.focused = false;
-            }*/
             listener: function ({code}) {
                 {
-                    switch(code){
-                        case 'ArrowRight' : this.setFocus(1); console.log('right');
+                    //comme ce component n'a qu'une ligne on remove les listeners directement au up & down
+                    switch (code) {
+                        case 'ArrowRight' :
+                            this.setFocus(1);
                             break;
-                        case 'ArrowLeft' : this.setFocus(-1);
+                        case 'ArrowLeft' :
+                            this.setFocus(-1);
+                            break;
+                        case 'ArrowUp' :
+                            this.removeListener(this.listener);
+                            break;
+                        case 'ArrowDown' :
+                            this.removeListener(this.listener);
+                            break;
                     }
                 }
             }
 
+        },
+        mounted() {
+            EventBus.$on('subMenuSelected', (index) => {
+                this.focus = index;
+            });
         }
     }
 </script>
 
 <style scoped>
-    #cont{
+    #cont {
         display: flex;
         height: 70px;
         width: 100%;
     }
-    .inside{
+
+    .inside {
         width: 20%;
     }
 

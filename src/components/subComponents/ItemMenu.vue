@@ -3,9 +3,12 @@
 </template>
 
 <script>
+    import { EventBus } from '../../main';
+    import   source  from "../../source/globalSource";
+
     export default {
         name: "ItemMenu",
-        props:['title'],
+        props:['title', 'index'],
         data: function() {
             return {
                 focused: false,
@@ -16,6 +19,8 @@
         methods: {
 
             isFocus: function () {
+                source.indexSubMenu = this.index;
+                this.$parent.focus = this.index;
                 this.focused = true;
             },
             removeFocus: function () {

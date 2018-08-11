@@ -1,7 +1,17 @@
 import Vue from 'vue'
-export const globalSource = {
+import {EventBus} from "../main";
 
-            lastEltFocused : null,
-            eltFocused : null,
+let source = new Vue({
+    data: {
+        indexSubMenu: 0,
+    },
+    watch: {
+        indexSubMenu: function () {
+            EventBus.$emit('subMenuSelected', this.indexSubMenu);
+        },
 
-}
+
+    }
+})
+
+export default source;

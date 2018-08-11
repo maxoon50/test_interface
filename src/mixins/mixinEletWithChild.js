@@ -1,4 +1,4 @@
-import { EventBus } from '../main';
+
 import { globalSource } from '../source/globalSource';
 export const mixinEletWithChild = {
     data: function() {
@@ -12,7 +12,6 @@ export const mixinEletWithChild = {
         isFocus: function () {
             this.focused = true;
             this.getFocus();
-           // EventBus.$emit('parentRemoveListener');
         },
         removeFocus: function () {
             this.focused = false;
@@ -43,10 +42,8 @@ export const mixinEletWithChild = {
             }
             // ici on set le focus sur le nouvel élément (selon le this.focus))
             let eltToFocus = this.$refs.contents[this.focus];
-            console.log(eltToFocus)
             eltToFocus.isFocus();
             this.lastFocused = eltToFocus;
-
         },
 
         initListeners: function () {

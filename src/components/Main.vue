@@ -1,37 +1,23 @@
 <template>
-    <main id="main"  class="flex">
-        <!-- <div class="grow border">
-            <Contents ref="channels" :categorie="'channels'"/>
-        </div>
-        <div class="grow border">
-            <Contents ref="contents" :categorie="'contents'"/>
-        </div>
-        <div class="grow border">
-            <Contents ref="apps" :categorie="'apps'"/>
-        </div>
-        <div class="grow border">
-            <Contents ref="films" :categorie="'films'"/>
-        </div>
-        <div class="grow border">
-            <Contents ref="extras" :categorie="'extras'"/>
-        </div> -->
-      <template v-for="child in eltsName">
-            <component :is="'contents'" :key="child" :categorie="'contents'" ref="contents"></component>
+    <main id="main" class="flex">
+        <template v-for="(child, index) in eltsName">
+            <component :is="'contents'" :key="child" :categorie="'contents'" ref="contents" :index="index"></component>
         </template>
     </main>
 </template>
 
 <script>
     import Contents from './subComponents/Contents';
-    import { EventBus } from '../main';
-    import { mixinEletWithChild } from '../mixins/mixinEletWithChild';
+    import {EventBus} from '../main';
+    import {mixinEletWithChild} from '../mixins/mixinEletWithChild';
+
     export default {
         name: "app-main",
         components: {
             Contents
         },
-        mixins : [mixinEletWithChild],
-        data:function(){
+        mixins: [mixinEletWithChild],
+        data: function () {
             return {
                 eltsName: ['channels', 'contents', 'apps', 'films', 'extras'],
                 focused: false,
@@ -40,56 +26,26 @@
             }
         },
         methods: {
-
-            // removeFocus: function () {
-            //     this.focused = false;
-            //     this.removeListeners();
-            //     this.lastFocused.removeFocus();
-            //     //remove tous les focus des enfants
-            // },
-             getFocus: function () {
-                this.focus = 0;
-                 this.initListeners();
-                 this.giveFocus();
-                 console.log(this.$parent)
-                 this.$parent.removeListeners();
-/*                 EventBus.$emit('parentRemoveListener', this.lastFocused);*/
-             },
-            // setFocus: function (pos) {
-               
-            //     if(this.focus <= 0 && pos == -1){
-            //         this.focus = this.componentList.length-1;
-            //     }else if(this.focus == this.componentList.length-1 && pos == 1){
-            //         this.focus = 0;
-            //     }else{
-            //         this.focus += pos;
-            //     }
-            //     this.giveFocus();
-            // },
-            // giveFocus: function () {
-            //     if(this.lastFocused != null){
-            //         this.lastFocused.removeFocus();
-            //     }
-            //     let eltToFocus = this.$refs.contents[this.focus];
-            //     eltToFocus.isFocus();
-            //     this.lastFocused = eltToFocus;
-            // },
-            // initListeners: function () {
-            //     window.addEventListener('keydown', this.listener );
-            // },
-            // removeListeners: function() {
-            //     window.removeEventListener('keydown', this.listener);
-            // },
+            getFocus: function () {
+                this.initListeners();
+                this.giveFocus();
+                this.$parent.removeListeners();
+            },
             listener: function ({code}) {
-             {
-                    switch(code){
-                        case 'ArrowRight' : this.setFocus(1); console.log('right');
+                {
+                    switch (code) {
+                        case 'ArrowRight' :
+                            this.setFocus(1);
                             break;
-                        case 'ArrowLeft' : this.setFocus(-1);
+                        case 'ArrowLeft' :
+                            this.setFocus(-1);
                     }
                 }
             }
 
+        },
+        mounted() {
+            EventBus.$on('subMenuSelected', (index) => this.focus = index);
         }
     }
 </script>
@@ -98,10 +54,12 @@
     #main {
         flex-grow: 1;
     }
+
     .grow {
         flex-grow: 1;
     }
-    .border{
+
+    .border {
         border: 1px solid grey;
     }
 </style>
