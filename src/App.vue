@@ -50,9 +50,7 @@
                 }
                 this.giveFocus();
             },
-            listener({
-                         code
-                     }) {
+            listener({ code }) {
                 switch (code) {
                     case 'ArrowDown':
                         this.setFocus(1);

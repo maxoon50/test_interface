@@ -48,6 +48,7 @@
 
         },
         mounted() {
+            // on set le focus selon le sous menu selectionné
             EventBus.$on('subMenuSelected', (index) => this.focus = index);
         }
     }
