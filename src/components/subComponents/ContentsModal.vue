@@ -6,11 +6,11 @@
 
 <script>
     import Channels from './Channels.vue';
-    import source from '../../source/globalSource'
     import {mixinEletWithChild} from '../../mixins/mixinEletWithChild';
+    import source from '../../source/globalSource';
 
     export default {
-        name: "main-little",
+        name: "ContentsModal",
         components: {
             Channels
         },
@@ -24,21 +24,22 @@
         },
         methods: {
             isFocus: function () {
-                source.indexSubMenu = this.index;
                 this.focused = true;
-                this.getFocus();
+                this.getFocus(source.modalY);
             },
             setFocus: function (pos) {
                 /* si on arrive en haut /*/
                 if (this.focus <= 0 && pos == -1) {
-                    this.removeFocus();
-                    this.$parent.removeFocus();
-                    this.$parent.$parent.isFocus();
-                    return;
+                    /*         this.removeFocus();
+                             this.$parent.removeFocus();
+                             this.$parent.$parent.isFocus();*/
+                    this.focus = this.$refs.contents.length - 1;
                 } else if (this.focus == this.$refs.contents.length - 1 && pos == 1) {
                     this.focus = 0;
+                    source.modalY = 0;
                 } else {
                     this.focus += pos;
+                    source.modalY += pos;
                 }
                 this.giveFocus();
             },
@@ -48,11 +49,11 @@
                 {
                     switch (code) {
                         case 'ArrowDown':
-                            console.log('down contents');
+                            console.log('down modal');
                             this.setFocus(1);
                             break;
                         case 'ArrowUp':
-                            console.log('up contents');
+                            console.log('up modal');
                             this.setFocus(-1);
                     }
                 }
@@ -67,9 +68,10 @@
 </script>
 
 <style scoped>
-    .contents{
+    .contents {
         width: 25%;
     }
+
     .little {
         flex-grow: 1;
     }

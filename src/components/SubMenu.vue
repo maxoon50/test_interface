@@ -13,6 +13,7 @@
     import ItemMenu from './subComponents/ItemMenu';
     import {mixinEletWithChild} from '../mixins/mixinEletWithChild';
     import {EventBus} from "../main";
+    import source from '../source/globalSource';
 
     export default {
         components: {
@@ -24,7 +25,8 @@
                 focused: false,
                 subMenuElements: ['menu1', 'menu2', 'menu3', 'menu4', 'menu5'],
                 focus: 0,
-                lastFocused: null
+                lastFocused: null,
+                source
             }
         },
         methods: {
@@ -33,6 +35,11 @@
                 this.focused = true;
                 // on doit setter le focus sur le content qui était focus en dernier
                 this.getFocus(this.focus);
+            },
+            giveFocusToModal(){
+                this.removeListeners(this.listener);
+                this.$parent.removeListeners();
+                this.source.modalOpened = true;
             },
             listener: function ({code}) {
                 {
@@ -45,10 +52,13 @@
                             this.setFocus(-1);
                             break;
                         case 'ArrowUp' :
-                            this.removeListener(this.listener);
+                            this.removeListeners(this.listener);
                             break;
                         case 'ArrowDown' :
-                            this.removeListener(this.listener);
+                            this.removeListeners(this.listener);
+                            break;
+                        case 'Enter' :
+                            this.giveFocusToModal();
                             break;
                     }
                 }
@@ -59,6 +69,10 @@
             EventBus.$on('subMenuSelected', (index) => {
                 this.focus = index;
             });
+            EventBus.$on('ModalClosed', (index)=>{
+                this.isFocus();
+                this.$parent.initListeners();
+            })
         }
     }
 </script>

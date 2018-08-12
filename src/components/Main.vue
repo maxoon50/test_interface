@@ -1,5 +1,6 @@
 <template>
     <main id="main" class="flex">
+        <Modal/>
         <template v-for="(child, index) in eltsName">
             <component :is="'contents'" :key="child" :categorie="'contents'" ref="contents" :index="index"></component>
         </template>
@@ -10,11 +11,13 @@
     import Contents from './subComponents/Contents';
     import {EventBus} from '../main';
     import {mixinEletWithChild} from '../mixins/mixinEletWithChild';
+    import Modal from './Modal'
 
     export default {
         name: "app-main",
         components: {
-            Contents
+            Contents,
+            Modal
         },
         mixins: [mixinEletWithChild],
         data: function () {
@@ -53,6 +56,7 @@
 <style scoped>
     #main {
         flex-grow: 1;
+        position: relative;
     }
 
     .grow {
