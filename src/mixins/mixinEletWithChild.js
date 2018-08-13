@@ -5,7 +5,8 @@ export const mixinEletWithChild = {
         return {
             focused: false,
             componentList : this.$refs,
-            globalSource
+            globalSource,
+            focus : 0
         }
     },
     methods:{
@@ -41,6 +42,7 @@ export const mixinEletWithChild = {
                 this.lastFocused.removeFocus();
             }
             // ici on set le focus sur le nouvel élément (selon le this.focus))
+            console.log(this.focus)
             let eltToFocus = this.$refs.contents[this.focus];
             eltToFocus.isFocus();
             this.lastFocused = eltToFocus;

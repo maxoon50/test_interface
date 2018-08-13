@@ -20,12 +20,14 @@
             return {
                 focused: false,
                 channels: [1, 2, 3, 4, 5],
+                source
             }
         },
         methods: {
             isFocus: function () {
                 this.focused = true;
-                this.getFocus(source.modalY);
+                console.log(this.source.modalY)
+                this.getFocus(this.source.modalY);
             },
             setFocus: function (pos) {
                 /* si on arrive en haut /*/
@@ -34,12 +36,17 @@
                              this.$parent.removeFocus();
                              this.$parent.$parent.isFocus();*/
                     this.focus = this.$refs.contents.length - 1;
+                    this.source.modalY += this.$refs.contents.length - 1;
                 } else if (this.focus == this.$refs.contents.length - 1 && pos == 1) {
-                    this.focus = 0;
-                    source.modalY = 0;
-                } else {
+                    this.$parent.removeFocus();
+                    // on set le button du parent a focus
+                    this.$parent.$refs.buttons.isFocus();
+                    return;
+                } else if(this.focus >= -1 && this.focus <= this.$refs.contents.length - 1 ) {
                     this.focus += pos;
-                    source.modalY += pos;
+                    this.source.modalY += pos;
+                }else{
+                    return;
                 }
                 this.giveFocus();
             },
@@ -49,12 +56,11 @@
                 {
                     switch (code) {
                         case 'ArrowDown':
-                            console.log('down modal');
                             this.setFocus(1);
                             break;
                         case 'ArrowUp':
-                            console.log('up modal');
                             this.setFocus(-1);
+                            break;
                     }
                 }
             }

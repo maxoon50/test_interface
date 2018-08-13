@@ -37,6 +37,9 @@
                 this.getFocus(this.focus);
             },
             giveFocusToModal(){
+                //on reset la position dans la modal
+                this.source.modalX = 0;
+                this.source.modalY = 0;
                 this.removeListeners(this.listener);
                 this.$parent.removeListeners();
                 this.source.modalOpened = true;

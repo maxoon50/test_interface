@@ -34,7 +34,7 @@
 <style scoped>
     .channel {
         border: 1px solid grey;
-        height: 100px;
+        height: 70px;
         width: 100%;
     }
 </style>

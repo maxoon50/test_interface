@@ -5,7 +5,8 @@ let source = new Vue({
     data: {
         indexSubMenu: 0,
         modalOpened: false,
-        modalY: 0
+        modalY: 0,
+        modalX : 0
     },
     watch: {
         indexSubMenu: function () {
