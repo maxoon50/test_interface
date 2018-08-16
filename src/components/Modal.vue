@@ -41,9 +41,9 @@
             },
             setFocus: function (pos) {
                 if (this.focus <= 0 && pos == -1) {
-                    this.focus = this.componentList.contents.length - 1;
-                    this.source.modalX = this.componentList.contents.length - 1;
-                } else if (this.focus == this.componentList.contents.length - 1 && pos == 1) {
+                    this.focus = this.$refs.contents.length - 1;
+                    this.source.modalX = this.$refs.contents.length - 1;
+                } else if (this.focus == this.$refs.contents.length - 1 && pos == 1) {
                     this.focus = 0;
                     this.source.modalX = 0;
                 } else if(this.focus >= -1 && this.focus <= this.$refs.contents.length - 1 ) {
@@ -54,11 +54,6 @@
                 }
                 this.giveFocus();
             },
-            /*        getFocus: function (index) {
-                        this.focus = index || 0;
-                        this.initListeners();
-                        this.giveFocus();
-                    },*/
             listener: function ({code}) {
                 {
                     switch (code) {

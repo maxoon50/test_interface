@@ -5,21 +5,10 @@
 </template>
 
 <script>
+    import mixinEletWithoutChild from '../mixins/mixiEltWithoutChild';
     export default {
         name: "app-header",
-        data: function () {
-            return {
-                focused: false
-            }
-        },
-        methods: {
-            isFocus: function () {
-                this.focused = true;
-            },
-            removeFocus: function () {
-                this.focused = false;
-            }
-        }
+        mixins: [mixinEletWithoutChild],
     }
 </script>
 

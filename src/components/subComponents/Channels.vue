@@ -5,29 +5,11 @@
 </template>
 
 <script>
+    import mixinEletWithoutChild from '../../mixins/mixiEltWithoutChild';
     export default {
-        components: {
-    
-        },
         props: ['nom'],
-        data: function() {
-            return {
-                componentList: [],
-                focused: false,
-                focus: 0,
-                lastFocused: null
-            }
-        },
-        methods: {
-    
-            isFocus: function() {
-                this.focused = true;
-            },
-            removeFocus: function() {
-                this.focused = false;
-            },
-    
-        }
+        mixins: [mixinEletWithoutChild],
+
     }
 </script>
 

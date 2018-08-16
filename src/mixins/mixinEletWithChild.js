@@ -1,11 +1,9 @@
 
-import { globalSource } from '../source/globalSource';
+
 export const mixinEletWithChild = {
     data: function() {
         return {
             focused: false,
-            componentList : this.$refs,
-            globalSource,
             focus : 0
         }
     },
@@ -28,8 +26,8 @@ export const mixinEletWithChild = {
         
         setFocus: function (pos) {
             if(this.focus <= 0 && pos == -1){
-                this.focus = this.componentList.contents.length-1;
-            }else if(this.focus == this.componentList.contents.length-1 && pos == 1){
+                this.focus = this.$refs.contents.length-1;
+            }else if(this.focus == this.$refs.contents.length-1 && pos == 1){
                 this.focus = 0;
             }else{
                 this.focus += pos;
@@ -42,7 +40,6 @@ export const mixinEletWithChild = {
                 this.lastFocused.removeFocus();
             }
             // ici on set le focus sur le nouvel élément (selon le this.focus))
-            console.log(this.focus)
             let eltToFocus = this.$refs.contents[this.focus];
             eltToFocus.isFocus();
             this.lastFocused = eltToFocus;
